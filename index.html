@@ -24,7 +24,10 @@ body {
 .hero {
   background:linear-gradient(160deg,#0b3d24,#146637); color:#fff; border-radius:24px; padding:30px 24px 26px;
   position:relative; overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,.14);
+  min-height:360px; display:flex; align-items:center;
 }
+.hero-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.hero-content { position:relative; z-index:1; width:100%; }
 .badge {
   display:flex; flex-direction:column; align-items:center; gap:2px; margin-bottom:16px;
 }
@@ -46,16 +49,63 @@ h1 {
 .card {
   background:var(--card); border:1px solid var(--line); border-radius:20px;
   margin-top:18px; padding:24px; box-shadow:0 8px 26px rgba(0,0,0,.05);
+  position:relative; overflow:hidden;
+}
+.card-fx { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.card-fx span { position:absolute; bottom:-12px; border-radius:50%; opacity:0; animation:cardDrift linear infinite; }
+.card-fx span:nth-child(1) { left:6%; width:6px; height:6px; background:#e8b23d; animation-duration:15s; animation-delay:0s; }
+.card-fx span:nth-child(2) { left:18%; width:4px; height:4px; background:#639922; animation-duration:19s; animation-delay:3s; }
+.card-fx span:nth-child(3) { left:32%; width:5px; height:5px; background:#fff4c6; animation-duration:16s; animation-delay:6s; }
+.card-fx span:nth-child(4) { left:52%; width:4px; height:4px; background:#97c459; animation-duration:20s; animation-delay:1.5s; }
+.card-fx span:nth-child(5) { left:68%; width:6px; height:6px; background:#e8b23d; animation-duration:17s; animation-delay:4.5s; }
+.card-fx span:nth-child(6) { left:82%; width:4px; height:4px; background:#639922; animation-duration:14s; animation-delay:2.5s; }
+.card-fx span:nth-child(7) { left:93%; width:5px; height:5px; background:#fff4c6; animation-duration:18s; animation-delay:5.5s; }
+.card-fx-top { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:2; }
+.card-fx-top span { position:absolute; bottom:-12px; border-radius:50%; opacity:0; animation:cardDriftSubtle linear infinite; }
+.card-fx-top span:nth-child(1) { left:38%; width:4px; height:4px; background:#e8b23d; animation-duration:21s; animation-delay:1s; }
+.card-fx-top span:nth-child(2) { left:60%; width:3px; height:3px; background:#97c459; animation-duration:24s; animation-delay:8s; }
+@keyframes cardDriftSubtle {
+  0% { transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+  8% { opacity:.18; }
+  92% { opacity:.18; }
+  100% { transform:translateY(-620px) translateX(16px) rotate(70deg); opacity:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-fx-top span { animation:none; opacity:0; }
+}
+@keyframes cardDrift {
+  0% { transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+  8% { opacity:.4; }
+  92% { opacity:.4; }
+  100% { transform:translateY(-620px) translateX(16px) rotate(70deg); opacity:0; }
+}
+.reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.in-view { opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .card-fx span { animation:none; opacity:0; }
+  .reveal { opacity:1; transform:none; transition:none; }
 }
 .notice { background:var(--soft); border-left:4px solid var(--accent); border-radius:12px; padding:15px 16px; margin-bottom:22px; }
 .notice p { margin:0; font-size:15px; }
-label { display:block; font-weight:700; font-size:14px; margin:0 0 7px; }
+label { display:block; font-weight:700; font-size:14px; margin:0 0 7px; transition:color .2s ease; }
 input, textarea {
   width:100%; border:1px solid #cfcfc9; border-radius:12px; padding:13px 14px;
   font:inherit; font-size:16px; background:#fff; color:var(--ink); outline:none;
-  transition:.15s;
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
-input:focus, textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(11,61,36,.12); }
+input:hover, textarea:hover { border-color:#9ecb8a; }
+input:focus, textarea:focus {
+  border-color:var(--accent); box-shadow:0 0 0 3px rgba(11,61,36,.12);
+  animation:fieldPulse .5s ease;
+}
+@keyframes fieldPulse {
+  0% { box-shadow:0 0 0 0 rgba(11,61,36,.35); }
+  100% { box-shadow:0 0 0 6px rgba(11,61,36,0); }
+}
+.field:focus-within label { color:var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  input:focus, textarea:focus { animation:none; }
+}
 textarea { min-height:105px; resize:vertical; }
 .field { margin-bottom:16px; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
@@ -70,7 +120,7 @@ textarea { min-height:105px; resize:vertical; }
 .footer strong { color:#222; }
 @media(max-width:620px) {
   .wrap { width:min(100% - 18px,920px); padding-top:10px; }
-  .hero { border-radius:18px; padding:24px 15px 25px; }
+  .hero { border-radius:18px; padding:24px 15px 25px; min-height:300px; }
   .badge .leaf { font-size:32px; }
   h1 { font-size:clamp(21px,6vw,30px); line-height:1.42; letter-spacing:-0.01em; }
   .hero p { font-size:14px; line-height:1.75; }
@@ -82,17 +132,21 @@ textarea { min-height:105px; resize:vertical; }
 <body>
 <div class="wrap">
   <section class="hero">
-    <div class="badge">
-      <div class="leaf">🌿</div>
-      <div class="org">പരിസ്ഥിതി സമിതി</div>
-      <div class="panchayat">തൊണ്ടർനാട് ഗ്രാമപഞ്ചായത്ത്, വയനാട്</div>
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="badge">
+        <div class="leaf">🌿</div>
+        <div class="org">പരിസ്ഥിതി സമിതി</div>
+        <div class="panchayat">തൊണ്ടർനാട് ഗ്രാമപഞ്ചായത്ത്, വയനാട്</div>
+      </div>
+      <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+      <h1>കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+      <p>പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
     </div>
-    <div class="eyebrow">Public Participation • Western Ghats ESA</div>
-    <h1>കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
-    <p>പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
   </section>
 
-  <section class="card">
+  <section class="card reveal">
+    <div class="card-fx" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="notice">
       <p><strong>തൊണ്ടർനാട് ഗ്രാമപഞ്ചായത്തിലെ ജനങ്ങൾക്കും കർഷകർക്കും ഒരു സൗകര്യം</strong><br>
       Ministry of Environment, Forest and Climate Change-ലേക്ക് തയ്യാറാക്കിയ എതിർപ്പ് ഇമെയിൽ നിങ്ങളുടെ പേരും മൊബൈൽ നമ്പറും വിലാസവും ചേർത്ത് നേരിട്ട് അയയ്ക്കാം. താഴെയുള്ള വിവരങ്ങൾ പൂരിപ്പിച്ച ശേഷം <strong>“ഇമെയിൽ അയക്കാൻ ബട്ടൺ അമർത്തുക”</strong> എന്ന ബട്ടൺ അമർത്തുക.</p>
@@ -129,6 +183,7 @@ textarea { min-height:105px; resize:vertical; }
       <button class="btn" type="submit">ഇമെയിൽ അയക്കാൻ ബട്ടൺ അമർത്തുക</button>
       <div class="small">ബട്ടൺ അമർത്തുമ്പോൾ നിങ്ങളുടെ മൊബൈലിലെ default email app തുറന്ന് To, BCC, Subject, Body എന്നിവ തയ്യാറാകും.</div>
     </form>
+    <div class="card-fx-top" aria-hidden="true"><span></span><span></span></div>
   </section>
 
   <footer class="footer">
@@ -248,6 +303,23 @@ function formatDate(value) {
 
 document.getElementById("date").value = new Date().toISOString().slice(0,10);
 
+(function () {
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("in-view"); });
+  }
+})();
+
 document.getElementById("emailForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -275,5 +347,7 @@ document.getElementById("emailForm").addEventListener("submit", function(e) {
   window.location.href = mailto;
 });
 </script>
+<script src="assets/three.min.js"></script>
+<script src="assets/hero-scene.js"></script>
 </body>
 </html>
