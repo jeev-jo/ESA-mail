@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Hero heading font comparison</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500&family=Baloo+Chettan+2:wght@700&family=Manjari:wght@700&family=Chilanka&family=Gayathri:wght@700&family=Anek+Malayalam:wght@700&family=Noto+Serif+Malayalam:wght@700&display=swap');
+@font-face { font-family:"Dyuthi"; src:url('fonts/dyuthi-regular.ttf') format('truetype'); }
+@font-face { font-family:"Nupuram Calligraphy"; src:url('fonts/nupuram-calligraphy-regular.ttf') format('truetype'); }
+
+* { box-sizing:border-box; }
+body {
+  margin:0; background:#f4f5f2; color:#171717;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.6; padding:24px 0 60px;
+}
+.wrap { width:min(920px,calc(100% - 28px)); margin:0 auto; }
+.intro { text-align:center; margin-bottom:20px; }
+.intro h1 { font-size:20px; margin:0 0 4px; }
+.intro p { font-size:14px; color:#666; margin:0; }
+.notice {
+  background:#fff4d6; border:1px solid #e8c977; border-radius:12px; padding:14px 18px;
+  font-size:13px; color:#5a4a1a; margin:0 0 28px; line-height:1.6;
+}
+.notice strong { color:#3d3110; }
+
+.sample { margin-bottom:34px; }
+.sample-label {
+  display:flex; align-items:center; gap:10px; margin:0 0 10px;
+  font-size:13px; font-weight:700; color:#333;
+}
+.sample-label .num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:50%; background:#0b3d24; color:#fff;
+  font-size:12px; flex:none;
+}
+
+.hero {
+  background:linear-gradient(160deg,#0b3d24,#146637); color:#fff; border-radius:24px; padding:30px 24px 26px;
+  position:relative; overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,.14);
+  min-height:320px; display:flex; align-items:center;
+}
+.hero-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.hero-content { position:relative; z-index:1; width:100%; }
+.badge { display:flex; flex-direction:column; align-items:center; gap:2px; margin-bottom:16px; }
+.badge .leaf { font-size:34px; line-height:1; }
+.badge .org { font-weight:800; font-size:17px; letter-spacing:.02em; text-align:center; }
+.eyebrow { text-align:center; letter-spacing:.08em; text-transform:uppercase; font-size:11px; opacity:.68; font-family:system-ui,sans-serif; }
+h1.heading {
+  text-align:center; font-size:clamp(22px,6.2vw,38px); line-height:1.4; margin:9px 0 12px;
+  font-weight:700; overflow-wrap:anywhere; word-break:normal; hyphens:none;
+}
+.hero p.desc {
+  text-align:center; margin:0 auto; max-width:720px; color:#e4e9e3; font-size:14px;
+  font-family:'Noto Sans Malayalam',system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>Hero heading — font comparison</h1>
+    <p>Same hero, same animation — only the heading + badge font changes.</p>
+  </div>
+
+  <div class="notice">
+    <strong>Heads up:</strong> of the 8 fonts you added, 6 (all the "ML-TT-*" ones — Anakha, Bhavana, Gauri Heavy,
+    Kanika, Ravivarma, Vinay) turned out to be legacy pre-Unicode Malayalam fonts. They map ordinary Latin
+    keystrokes directly to Malayalam-shaped glyphs (an old font format from before Unicode Malayalam existed),
+    so they don't have any mapping for real Unicode Malayalam text like this site uses — applying them just
+    silently falls back to the default font. Only <strong>Dyuthi</strong> and <strong>Nupuram Calligraphy</strong>
+    are genuine Unicode fonts. If you want the "ML-TT" look specifically, you'd need Unicode versions of those
+    same typefaces.
+    <br><br>
+    I also sourced 6 more genuine Unicode Malayalam fonts from Google Fonts and verified each one directly
+    (checked their actual glyph tables for full Malayalam coverage, not just the family name) — <strong>Baloo
+    Chettan 2</strong>, <strong>Manjari</strong>, <strong>Chilanka</strong>, <strong>Gayathri</strong>,
+    <strong>Anek Malayalam</strong>, and <strong>Noto Serif Malayalam</strong> — added below alongside your
+    two working picks.
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">1</span> Noto Sans Malayalam (current site font)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Noto Sans Malayalam',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Noto Sans Malayalam',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">2</span> Dyuthi</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Dyuthi',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Dyuthi',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">3</span> Nupuram Calligraphy</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Nupuram Calligraphy',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Nupuram Calligraphy',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">4</span> Baloo Chettan 2 (bold, rounded)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Baloo Chettan 2',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Baloo Chettan 2',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">5</span> Manjari (bold)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Manjari',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Manjari',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">6</span> Chilanka (handwriting style)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Chilanka',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Chilanka',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">7</span> Gayathri (bold)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Gayathri',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Gayathri',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">8</span> Anek Malayalam (modern)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Anek Malayalam',sans-serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Anek Malayalam',sans-serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="sample">
+    <div class="sample-label"><span class="num">9</span> Noto Serif Malayalam (formal, serif)</div>
+    <section class="hero">
+      <canvas class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="badge"><div class="leaf">🌿</div><div class="org" style="font-family:'Noto Serif Malayalam',serif;">പരിസ്ഥിതി സമിതി</div></div>
+        <div class="eyebrow">Public Participation • Western Ghats ESA</div>
+        <h1 class="heading" style="font-family:'Noto Serif Malayalam',serif;">കേരളത്തിന്റെ ശബ്ദം<br>അധികാരികളിലെത്തിക്കാം</h1>
+        <p class="desc">പശ്ചിമഘട്ട പരിസ്ഥിതിലോല മേഖല (ESA) സംബന്ധിച്ച ഗസറ്റ് വിജ്ഞാപനത്തിനെതിരെ നിങ്ങളുടെ അഭിപ്രായവും എതിർപ്പും കേന്ദ്ര പരിസ്ഥിതി മന്ത്രാലയത്തെ നേരിട്ട് അറിയിക്കാം.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="assets/three.min.js"></script>
+<script src="assets/hero-scene.js"></script>
+</body>
+</html>
